@@ -14,11 +14,13 @@ void ofApp::setup(){
 
 	input.setView(&view);
 
-	//cam.setupPerspective();
-	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 1000));
-	view.cam.enableOrtho();
+	initLightingAndMaterials();
 
-	//changeGameState(new MenuState(), &ents, &rm, &input, &view, &curGameState);
+	//cam.setupPerspective();
+	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 10.0f));
+	//view.cam.enableOrtho();
+	curGameState = nullptr;
+	changeGameState(new MainStage(), &ents, &rm, &input, &view, &curGameState);
 }
 
 //--------------------------------------------------------------
@@ -69,6 +71,9 @@ void ofApp::draw(){
 	*/
 
 	curGameState->draw();
+
+	ofEnableLighting();              // shaded mode
+	rm.getModel("models\\mars-low.obj")->drawFaces();
 
 	view.cam.end();
 
@@ -139,4 +144,39 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+void ofApp::initLightingAndMaterials() {
+
+	static float ambient[] =
+	{ .5f, .5f, .5, 1.0f };
+	static float diffuse[] =
+	{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	static float position[] =
+	{ 5.0, 5.0, 5.0, 0.0 };
+
+	static float lmodel_ambient[] =
+	{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	static float lmodel_twoside[] =
+	{ GL_TRUE };
+
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT1, GL_POSITION, position);
+
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+	glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE, lmodel_twoside);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	//	glEnable(GL_LIGHT1);
+	glShadeModel(GL_SMOOTH);
 }

@@ -51,6 +51,23 @@ ResourceManager::ResourceManager()
 		temp.load(soundloopsDir.getPath(i));
 		soundloops[soundloopsDir.getPath(i)] = temp;
 	}
+
+	ofDirectory modelsDir("models");
+	//only show model files
+	modelsDir.allowExt("obj");
+	//modelsDir.allowExt("ma");
+	//modelsDir.allowExt("mtl");
+	//populate the directory object
+	modelsDir.listDir();
+
+	//go through and print out all the paths
+	for (size_t i = 0; i < modelsDir.size(); i++) {
+		std::cout << (modelsDir.getPath(i)) << "\n";
+		//ofxAssimpModelLoader temp;
+		models[modelsDir.getPath(i)].loadModel(modelsDir.getPath(i));
+		models[modelsDir.getPath(i)].setScaleNormalization(false);
+		meshes[modelsDir.getPath(i)] = models[modelsDir.getPath(i)].getMesh(0);
+	}
 }
 
 ResourceManager::~ResourceManager()
@@ -72,6 +89,24 @@ ResourceManager::~ResourceManager()
 		soundloops[x.first].unload();
 	}
 	soundloops.clear();
+
+	for (auto const& x : sounds)
+	{
+		soundloops[x.first].unload();
+	}
+	soundloops.clear();
+
+	for (auto const& x : models)
+	{
+		models[x.first].clear();
+	}
+	models.clear();
+
+	for (auto const& x : meshes)
+	{
+		meshes[x.first].clear();
+	}
+	meshes.clear();
 }
 
 ofImage* ResourceManager::getImage(std::string path)
@@ -103,5 +138,15 @@ void ResourceManager::stopSoundLoop(std::string path)
 	{
 		soundloops[path].stop();
 	}
+}
+
+ofxAssimpModelLoader* ResourceManager::getModel(std::string path)
+{
+	return &models[path];
+}
+
+ofMesh* ResourceManager::getMesh(std::string path)
+{
+	return &meshes[path];
 }
 

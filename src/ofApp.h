@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "View.h"
 #include "GameState.h"
+#include "MainStage.h"
 
 //Alan Duong, 03/31/19
 //Main app class.
@@ -28,6 +29,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void initLightingAndMaterials();
 		
 		EntitySystem ents;
 		ResourceManager rm;
