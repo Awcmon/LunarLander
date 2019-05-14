@@ -6,6 +6,8 @@
 View::View()
 {
 	punchPos = ofVec3f(0.0f, 0.0f, 0.0f);
+	ang = ofVec3f(0.0f, 0.0f, 0.0f);
+	distance = 10.0f;
 }
 
 void View::setInput(Input * _input)
@@ -32,10 +34,14 @@ void View::update()
 	if (input->mouseDown(0))
 	{
 		ofVec2f delta = input->mouseDelta();
-		std::cout << delta << "\n";
+		//std::cout << delta << "\n";
 		//cam.setOrientation(cam.getOrientationEuler() + ofVec3f(0.0f, 1.0f, 0.0f)*0.2f);
 		//cam.lookAt()
+		ang += ofVec3f(0.0f, -delta.x, delta.y) * 0.2f;
 	}
+
+	cam.setPosition(centerPos + ofVec3f(distance, 0.0f, 0.0f).getRotated(0.0f, ang.y, ang.z));
+	cam.lookAt(centerPos);
 
 	//cam.setPosition(punchPos.x, punchPos.y, 10.0f);
 }
@@ -43,4 +49,9 @@ void View::update()
 ofVec3f View::getTotalOffset()
 {
 	return punchPos;
+}
+
+void View::setCenterPos(ofVec3f _centerPos)
+{
+	centerPos = _centerPos;
 }

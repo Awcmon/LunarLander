@@ -12,17 +12,19 @@ class View
 public:
 	View();
 	void setInput(Input* _input);
-
-	Input* input;
-	
-	ofCamera cam;
-	//ofEasyCam cam;
-
 	void posViewPunch(ofVec3f pos);
 	void update();
 	ofVec3f getTotalOffset();
+	void setCenterPos(ofVec3f _centerPos);
 
+	Input* input;
+	ofCamera cam;
+	//ofEasyCam cam;
+
+private:
 	ofVec3f punchPos;
-
 	ofVec3f offset; //used for screenshake and stuff
+	float distance;
+	ofVec3f centerPos;
+	ofVec3f ang;
 };

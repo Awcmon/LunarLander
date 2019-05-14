@@ -19,8 +19,9 @@ void MainStage::setup()
 
 void MainStage::update()
 {
-	view->cam.setPosition(lander->getPos() + ofVec3f(10.0f, 10.0f, 10.0f));
-	view->cam.lookAt(lander->getPos());
+	//view->cam.setPosition(lander->getPos() + ofVec3f(10.0f, 10.0f, 10.0f));
+	//view->cam.lookAt(lander->getPos());
+	view->setCenterPos(lander->getPos() + ofVec3f(0.0f, 4.0f, 0.0f));
 }
 
 void MainStage::draw()
