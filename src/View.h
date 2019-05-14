@@ -27,4 +27,5 @@ private:
 	float distance;
 	ofVec3f centerPos;
 	ofVec3f ang;
+	float mouseSens;
 };

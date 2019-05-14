@@ -8,10 +8,10 @@ void MainStage::setup()
 	Prop* terrain = new Prop(rm->getModel("models\\moon-houdini.obj"));
 	ents->add(terrain);
 
-	lander = new Prop(rm->getModel("models\\lander.obj"));
+	lander = new Lander(rm->getModel("models\\lander.obj"), input);
 	ents->add(lander);
 	lander->setPos(ofVec3f(0.0f, 100.0f, 0.0f));
-	lander->setVel(ofVec3f(0.0f, -0.1f, 0.0f));
+	lander->setVel(ofVec3f(0.0f, -0.05f, 0.0f));
 
 	view->cam.setPosition(ofVec3f(50.0f, 50.0f, 50.0f));
 
