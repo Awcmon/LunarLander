@@ -8,6 +8,13 @@ View::View()
 	punchPos = ofVec3f(0.0f, 0.0f, 0.0f);
 }
 
+/*
+void View::setInput(Input * _input)
+{
+	input = _input;
+}
+*/
+
 void View::posViewPunch(ofVec3f _punchPos)
 {
 	if (_punchPos.lengthSquared() > punchPos.lengthSquared())
@@ -23,7 +30,7 @@ void View::update()
 	//punchPos.y = approach(punchPos.y, 0, (punchPos.y) * 0.1);
 	punchPos += (-punchPos) * 0.1;
 
-	cam.setPosition(punchPos.x, punchPos.y, 10.0f);
+	//cam.setPosition(punchPos.x, punchPos.y, 10.0f);
 }
 
 ofVec3f View::getTotalOffset()

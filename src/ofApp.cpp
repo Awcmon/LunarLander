@@ -14,11 +14,17 @@ void ofApp::setup(){
 
 	input.setView(&view);
 
+	ofEnableSmoothing();
+	ofEnableDepthTest();
 	initLightingAndMaterials();
 
 	//cam.setupPerspective();
-	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 10.0f));
+	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
+	view.cam.setDistance(10);
+	view.cam.setNearClip(.1);
+	view.cam.setFov(65.5);
 	//view.cam.enableOrtho();
+
 	curGameState = nullptr;
 	changeGameState(new MainStage(), &ents, &rm, &input, &view, &curGameState);
 }
@@ -46,6 +52,7 @@ void ofApp::draw(){
 	ofSetBackgroundColor(ofColor::navy);
 
 	view.cam.begin();
+	ofEnableLighting();              // shaded mode
 
 	/*
 	ofSetColor(ofColor::dimGrey);
@@ -72,8 +79,7 @@ void ofApp::draw(){
 
 	curGameState->draw();
 
-	ofEnableLighting();              // shaded mode
-	rm.getModel("models\\mars-low.obj")->drawFaces();
+	//rm.getModel("models\\moon-houdini.obj")->drawFaces();
 
 	view.cam.end();
 

@@ -67,6 +67,9 @@
     <ClCompile Include="src\MainStage.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Prop.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -303,6 +306,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\MainStage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Prop.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

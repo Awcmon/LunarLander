@@ -15,7 +15,7 @@ Entity::Entity(std::string _id, ofVec3f _pos, float _scale, ofVec3f _ang, ofVec3
 	color = ofColor(255, 255, 255);
 	alpha = 255;
 	mass = 1.0f;
-	accel = ofVec3f(0.0f, 0.0f);
+	accel = ofVec3f(0.0f, 0.0f, 0.0f);
 	angVel = 0.0f;
 
 	lifespan = -1;
@@ -37,7 +37,7 @@ void Entity::update()
 	pos += vel * dt;
 	vel += accel * dt;
 	//std::cout << pos << "\n";
-	accel = ofVec3f(0.0f, 0.0f); //clear accel/forces. a continuous force must be applied each frame.
+	accel = ofVec3f(0.0f, 0.0f, 0.0f); //clear accel/forces. a continuous force must be applied each frame.
 
 	ang += angVel * dt;
 }

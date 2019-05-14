@@ -200,6 +200,7 @@
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\Prop.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\View.cpp" />
   </ItemGroup>
@@ -266,6 +267,7 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\Prop.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\util.h" />
     <ClInclude Include="src\View.h" />

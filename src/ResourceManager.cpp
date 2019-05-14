@@ -66,7 +66,7 @@ ResourceManager::ResourceManager()
 		//ofxAssimpModelLoader temp;
 		models[modelsDir.getPath(i)].loadModel(modelsDir.getPath(i));
 		models[modelsDir.getPath(i)].setScaleNormalization(false);
-		meshes[modelsDir.getPath(i)] = models[modelsDir.getPath(i)].getMesh(0);
+		meshes[modelsDir.getPath(i)] = (&models[modelsDir.getPath(i)])->getMesh(0);
 	}
 }
 

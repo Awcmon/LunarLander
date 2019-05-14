@@ -5,6 +5,7 @@
 
 #include "GameState.h"
 #include "unordered_set"
+#include "Prop.h"
 #include "util.h"
 #include <array>
 
@@ -14,4 +15,6 @@ public:
 	void setup();
 	void update();
 	void draw();
+
+	Prop* lander;
 };
