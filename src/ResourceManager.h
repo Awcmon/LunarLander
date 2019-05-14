@@ -21,10 +21,12 @@ public:
 	void stopSoundLoop(std::string path);
 	ofxAssimpModelLoader* getModel(std::string path);
 	ofMesh* getMesh(std::string path);
+	void loadShader(std::string path);
 
 	std::unordered_map<std::string, ofImage> images;
 	std::unordered_map<std::string, ofSoundPlayer> sounds;
 	std::unordered_map<std::string, ofSoundPlayer> soundloops;
 	std::unordered_map<std::string, ofxAssimpModelLoader> models;
 	std::unordered_map<std::string, ofMesh> meshes;
+	std::unordered_map<std::string, ofShader> shaders;
 };

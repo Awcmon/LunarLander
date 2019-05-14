@@ -150,3 +150,8 @@ ofMesh* ResourceManager::getMesh(std::string path)
 	return &meshes[path];
 }
 
+void ResourceManager::loadShader(std::string path)
+{
+	shaders[path].load(path);
+}
+
