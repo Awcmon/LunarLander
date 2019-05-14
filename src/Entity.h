@@ -50,6 +50,7 @@ public:
 	void setAngVel(float _angVel);
 	void setColor(ofColor _color);
 	ofVec3f forward(); //get forward vector
+	void integrate();
 
 	ofVec3f pos;
 	ofVec3f size;

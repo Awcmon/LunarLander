@@ -31,15 +31,7 @@ void Entity::update()
 		remove();
 	}
 
-	//float dt = 1.0 / ofGetFrameRate();
-	float dt = 1.0f; //we are capped to 60 fps anyways
-
-	pos += vel * dt;
-	vel += accel * dt;
-	//std::cout << pos << "\n";
-	accel = ofVec3f(0.0f, 0.0f, 0.0f); //clear accel/forces. a continuous force must be applied each frame.
-
-	ang += angVel * dt;
+	integrate();
 }
 
 void Entity::draw()
@@ -145,6 +137,19 @@ ofVec3f Entity::forward()
 {
 	//return ofVec3f(1.0f, 0.0f).getRotated(ang);
 	return ofVec3f(1.0f, 0.0f, 0.0f);
+}
+
+void Entity::integrate()
+{
+	//float dt = 1.0 / ofGetFrameRate();
+	float dt = 1.0f; //we are capped to 60 fps anyways
+
+	pos += vel * dt;
+	vel += accel * dt;
+	//std::cout << pos << "\n";
+	accel = ofVec3f(0.0f, 0.0f, 0.0f); //clear accel/forces. a continuous force must be applied each frame.
+
+	ang += angVel * dt;
 }
 
 
