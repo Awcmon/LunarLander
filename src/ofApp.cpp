@@ -12,7 +12,8 @@ void ofApp::setup(){
 	ents.setResourceManager(&rm);
 	ents.setView(&view);
 
-	input.setView(&view);
+	//input.setView(&view);
+	view.setInput(&input);
 
 	ofEnableSmoothing();
 	ofEnableDepthTest();
@@ -20,7 +21,7 @@ void ofApp::setup(){
 
 	//cam.setupPerspective();
 	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
-	view.cam.setDistance(10);
+	//view.cam.setDistance(10);
 	view.cam.setNearClip(.1);
 	view.cam.setFov(65.5);
 	//view.cam.enableOrtho();
@@ -109,12 +110,12 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-	input.setMousePos(glm::vec3(x, y, 0.0f));
+	input.setMousePos(ofVec2f(x, y));
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	input.setMousePos(glm::vec3(x, y, 0.0f));
+	input.setMousePos(ofVec2f(x, y));
 }
 
 //--------------------------------------------------------------

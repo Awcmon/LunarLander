@@ -13,11 +13,14 @@ void MainStage::setup()
 	lander->setPos(ofVec3f(0.0f, 100.0f, 0.0f));
 	lander->setVel(ofVec3f(0.0f, -0.1f, 0.0f));
 
+	view->cam.setPosition(ofVec3f(50.0f, 50.0f, 50.0f));
+
 }
 
 void MainStage::update()
 {
-	view->cam.setPosition(lander->getPos());
+	view->cam.setPosition(lander->getPos() + ofVec3f(10.0f, 10.0f, 10.0f));
+	view->cam.lookAt(lander->getPos());
 }
 
 void MainStage::draw()

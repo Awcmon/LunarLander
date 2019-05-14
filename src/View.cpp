@@ -8,12 +8,11 @@ View::View()
 	punchPos = ofVec3f(0.0f, 0.0f, 0.0f);
 }
 
-/*
 void View::setInput(Input * _input)
 {
 	input = _input;
 }
-*/
+
 
 void View::posViewPunch(ofVec3f _punchPos)
 {
@@ -29,6 +28,14 @@ void View::update()
 	//punchPos.x = approach(punchPos.x, 0, (punchPos.x) * 0.1);
 	//punchPos.y = approach(punchPos.y, 0, (punchPos.y) * 0.1);
 	punchPos += (-punchPos) * 0.1;
+
+	if (input->mouseDown(0))
+	{
+		ofVec2f delta = input->mouseDelta();
+		std::cout << delta << "\n";
+		//cam.setOrientation(cam.getOrientationEuler() + ofVec3f(0.0f, 1.0f, 0.0f)*0.2f);
+		//cam.lookAt()
+	}
 
 	//cam.setPosition(punchPos.x, punchPos.y, 10.0f);
 }

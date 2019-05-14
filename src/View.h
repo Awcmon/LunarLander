@@ -5,18 +5,18 @@
 
 #include "ofMain.h"
 #include "util.h"
-//#include "Input.h"
+#include "Input.h"
 
 class View
 {
 public:
 	View();
-	//void setInput(Input* _input);
+	void setInput(Input* _input);
 
-	//Input* input;
+	Input* input;
 	
-	//ofCamera cam;
-	ofEasyCam cam;
+	ofCamera cam;
+	//ofEasyCam cam;
 
 	void posViewPunch(ofVec3f pos);
 	void update();
