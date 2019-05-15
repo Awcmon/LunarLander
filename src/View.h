@@ -4,7 +4,7 @@
 //This is a wrapper for ofCamera to help do screenshake.
 
 #include "ofMain.h"
-#include "util.h"
+#include "autil.h"
 #include "Input.h"
 
 class View

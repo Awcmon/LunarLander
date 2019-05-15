@@ -272,7 +272,7 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
     <ClInclude Include="src\Prop.h" />
     <ClInclude Include="src\ResourceManager.h" />
-    <ClInclude Include="src\util.h" />
+    <ClInclude Include="src\autil.h" />
     <ClInclude Include="src\VBOParticle.h" />
     <ClInclude Include="src\View.h" />
   </ItemGroup>

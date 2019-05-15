@@ -302,9 +302,6 @@
     <ClInclude Include="src\ResourceManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\util.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameState.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -321,6 +318,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\VBOParticle.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\autil.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
