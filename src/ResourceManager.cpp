@@ -13,9 +13,11 @@ ResourceManager::ResourceManager()
 	imagesDir.listDir();
 
 	//go through and print out all the paths
+	ofDisableArbTex();
 	for (size_t i = 0; i < imagesDir.size(); i++) {
 		std::cout << (imagesDir.getPath(i)) << "\n";
 		images[imagesDir.getPath(i)].load(imagesDir.getPath(i)); //load the image
+		//ofDisableArbTex();
 		ofLoadImage(textures[imagesDir.getPath(i)], imagesDir.getPath(i)); //load the texture
 	}
 
