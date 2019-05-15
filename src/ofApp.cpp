@@ -82,11 +82,11 @@ void ofApp::draw(){
 	ofDrawGrid(32.0f, 24, true, false, false, true);
 	*/
 
-	curGameState->draw();
-
 	//rm.getModel("models\\moon-houdini.obj")->drawFaces();
 
 	view.cam.end();
+
+	curGameState->draw();
 
 	/*
 	ofSetColor(ofColor::white);
