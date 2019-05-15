@@ -9,7 +9,9 @@
 void ofApp::setup(){
 	ofSeedRandom();
 
+	ofDisableArbTex();
 	rm.loadShader("shaders\\particle");
+	rm.loadShader("shaders/shader");
 
 	ents.setResourceManager(&rm);
 	ents.setView(&view);
