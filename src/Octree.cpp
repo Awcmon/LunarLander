@@ -174,7 +174,35 @@ void Octree::subdivide(const ofMesh & mesh, TreeNode & node, int numLevels, int 
 	}
 }
 
+//return all the leaf nodes that are intersected by the ray
+bool Octree::intersect(const Ray & ray, TreeNode* node, std::vector<TreeNode*>* nodesRtn)
+{
+	if (!node->box.intersect(ray, -1000, 1000))
+	{
+		return false;
+	}
+	else
+	{
+		if (node->children.size() > 0)
+		{
+			for (size_t i = 0; i < node->children.size(); i++)
+			{
+				intersect(ray, &node->children[i], nodesRtn);
+			}
+		}
+		else
+		{
+			//std::cout << "rip\n";
+			//*nodeRtn = *node;
+			nodesRtn->push_back(node);
+			//return true;
+		}
+		return true;
+	}
+}
+
 //TODO: Complete
+/*
 bool Octree::intersect(const Ray &ray, const TreeNode & node, TreeNode & nodeRtn) {
 	if (!node.box.intersect(ray, -1000, 1000))
 	{
@@ -225,29 +253,42 @@ bool Octree::intersect(const Ray &ray, const TreeNode & node, TreeNode & nodeRtn
 	}
 	
 }
+*/
 
 //returns the closest vertex to the ray.
+//get all the leaf nodes intersected by the ray, 
+//then go through all the nodes and find the point closest to the ray origin.
 ofVec3f Octree::trace(Ray ray)
 {
-	TreeNode retNode;
-	intersect(ray, root, retNode);
-	int n = retNode.points.size();
+	std::vector<TreeNode*> retNodes;
+	intersect(ray, &root, &retNodes);
+	//if (retNode == nullptr) { return ofVec3f(0.0f, 0.0f, 0.0f); }
+	//int n = retNode.points.size();
 
 	ofVec3f retPt;
-	drawBox(retNode.box);
+
+	ofNoFill();
+	for (int i = 0; i < retNodes.size(); i++)
+	{
+		drawBox(retNodes[i]->box);
+	}
+	ofFill();
 
 	float distance = 0;
-	for (int i = 0; i < retNode.points.size(); i++) {
-		ofVec3f point = mesh.getVertex(retNode.points[i]);
+	for (int i = 0; i < retNodes.size(); i++)
+	{
+		for (int j = 0; j < retNodes[i]->points.size(); j++) {
+			ofVec3f point = mesh.getVertex(retNodes[i]->points[j]);
 
-		// In camera space, the camera is at (0,0,0), so distance from 
-		// the camera is simply the length of the point vector
-		//
-		float curDist = (point - ofVec3f(ray.origin.x(), ray.origin.y(), ray.origin.z())).lengthSquared();
+			// In camera space, the camera is at (0,0,0), so distance from 
+			// the camera is simply the length of the point vector
+			//
+			float curDist = (point - ofVec3f(ray.origin.x(), ray.origin.y(), ray.origin.z())).lengthSquared();
 
-		if (i == 0 || curDist < distance) {
-			distance = curDist;
-			retPt = point;
+			if ((i == 0 && j == 0) || curDist < distance) {
+				distance = curDist;
+				retPt = point;
+			}
 		}
 	}
 	return retPt;

@@ -16,6 +16,23 @@ void Lander::update()
 	{
 		applyForce(ofVec3f(0.0f, 0.004f, 0.0f));
 	}
+
+	if (input->keyDown('w'))
+	{
+		applyForce(ofVec3f(0.0f, 0.0f, -0.004f));
+	}
+	if (input->keyDown('s'))
+	{
+		applyForce(ofVec3f(0.0f, 0.004f, 0.004f));
+	}
+	if (input->keyDown('a'))
+	{
+		applyForce(ofVec3f(-0.004f, 0.0f, 0.0f));
+	}
+	if (input->keyDown('d'))
+	{
+		applyForce(ofVec3f(0.004f, 0.004f, -0.0f));
+	}
 }
 
 void Lander::draw()
