@@ -5,7 +5,7 @@
 
 void MainStage::setup()
 {
-	Terrain* terrain = new Terrain(rm->getModel("models\\moon-houdini.obj"));
+	terrain = new Terrain(rm->getModel("models\\moon-houdini.obj"));
 	ents->add(terrain);
 
 	lander = new Lander(rm->getModel("models\\lander.obj"), input);
@@ -26,5 +26,5 @@ void MainStage::update()
 
 void MainStage::draw()
 {
-	
+	ofDrawSphere(terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))), 1.0f);
 }

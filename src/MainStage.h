@@ -18,5 +18,6 @@ public:
 	void update();
 	void draw();
 
+	Terrain* terrain;
 	Lander* lander;
 };

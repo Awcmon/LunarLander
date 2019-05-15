@@ -133,6 +133,7 @@ void Octree::subDivideBox8(const Box &box, vector<Box> & boxList) {
 void Octree::create(const ofMesh & geo, int numLevels) {
 	// initialize octree structure
 	//
+	mesh = geo;
 	root.box = meshBounds(geo);
 	for (size_t i = 0; i < geo.getNumVertices(); i++)
 	{
@@ -225,5 +226,30 @@ bool Octree::intersect(const Ray &ray, const TreeNode & node, TreeNode & nodeRtn
 	
 }
 
+//returns the closest vertex to the ray.
+ofVec3f Octree::trace(Ray ray)
+{
+	TreeNode retNode;
+	intersect(ray, root, retNode);
+	int n = retNode.points.size();
 
+	ofVec3f retPt;
+	drawBox(retNode.box);
+
+	float distance = 0;
+	for (int i = 0; i < retNode.points.size(); i++) {
+		ofVec3f point = mesh.getVertex(retNode.points[i]);
+
+		// In camera space, the camera is at (0,0,0), so distance from 
+		// the camera is simply the length of the point vector
+		//
+		float curDist = (point - ofVec3f(ray.origin.x(), ray.origin.y(), ray.origin.z())).lengthSquared();
+
+		if (i == 0 || curDist < distance) {
+			distance = curDist;
+			retPt = point;
+		}
+	}
+	return retPt;
+}
 

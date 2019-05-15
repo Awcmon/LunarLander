@@ -26,6 +26,7 @@ public:
 	static Box meshBounds(const ofMesh &);
 	int getMeshPointsInBox(const ofMesh &mesh, const vector<int> & points, Box & box, vector<int> & pointsRtn);
 	void subDivideBox8(const Box &b, vector<Box> & boxList);
+	ofVec3f trace(Ray ray);
 
 	ofMesh mesh;
 	TreeNode root;
