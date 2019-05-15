@@ -5,7 +5,7 @@
 
 void MainStage::setup()
 {
-	Prop* terrain = new Prop(rm->getModel("models\\moon-houdini.obj"));
+	Terrain* terrain = new Terrain(rm->getModel("models\\moon-houdini.obj"));
 	ents->add(terrain);
 
 	lander = new Lander(rm->getModel("models\\lander.obj"), input);

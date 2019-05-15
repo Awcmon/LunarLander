@@ -7,6 +7,7 @@
 #include "unordered_set"
 #include "Prop.h"
 #include "Lander.h"
+#include "Terrain.h"
 #include "autil.h"
 #include <array>
 
