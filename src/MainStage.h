@@ -9,7 +9,6 @@
 #include "Lander.h"
 #include "util.h"
 #include <array>
-#include "VBOParticle.h"
 
 class MainStage : public GameState
 {
@@ -19,10 +18,4 @@ public:
 	void draw();
 
 	Lander* lander;
-
-	std::vector<ofVec3f> points;
-	std::vector<ofVec3f> sizes;
-	ofVbo vbo;
-	ofShader shader;
-	ofTexture  particleTex;
 };
