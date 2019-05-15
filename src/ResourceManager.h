@@ -15,6 +15,7 @@ public:
 	ResourceManager();
 	~ResourceManager();
 	ofImage* getImage(std::string path);
+	ofTexture* getTexture(std::string path);
 	ofSoundPlayer* getSound(std::string path);
 	ofSoundPlayer* getSoundLoop(std::string path);
 	void playSoundLoop(std::string path);
@@ -22,8 +23,10 @@ public:
 	ofxAssimpModelLoader* getModel(std::string path);
 	ofMesh* getMesh(std::string path);
 	void loadShader(std::string path);
+	ofShader* getShader(std::string path);
 
 	std::unordered_map<std::string, ofImage> images;
+	std::unordered_map<std::string, ofTexture> textures;
 	std::unordered_map<std::string, ofSoundPlayer> sounds;
 	std::unordered_map<std::string, ofSoundPlayer> soundloops;
 	std::unordered_map<std::string, ofxAssimpModelLoader> models;

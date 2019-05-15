@@ -15,9 +15,8 @@ ResourceManager::ResourceManager()
 	//go through and print out all the paths
 	for (size_t i = 0; i < imagesDir.size(); i++) {
 		std::cout << (imagesDir.getPath(i)) << "\n";
-		ofImage temp;
-		temp.load(imagesDir.getPath(i));
-		images[imagesDir.getPath(i)] = temp;
+		images[imagesDir.getPath(i)].load(imagesDir.getPath(i)); //load the image
+		ofLoadImage(textures[imagesDir.getPath(i)], imagesDir.getPath(i)); //load the texture
 	}
 
 	ofDirectory soundsDir("sounds");
@@ -114,6 +113,11 @@ ofImage* ResourceManager::getImage(std::string path)
 	return &images[path];
 }
 
+ofTexture * ResourceManager::getTexture(std::string path)
+{
+	return &textures[path];
+}
+
 ofSoundPlayer* ResourceManager::getSound(std::string path)
 {
 	return &sounds[path];
@@ -152,6 +156,20 @@ ofMesh* ResourceManager::getMesh(std::string path)
 
 void ResourceManager::loadShader(std::string path)
 {
-	shaders[path].load(path);
+	
+	bool result = shaders[path].load(path);
+	if (result)
+	{
+		std::cout << "loaded shader: " << path << "\n";
+	}
+	else
+	{
+		std::cout << "could not load shader: " << path << "\n";
+	}
+}
+
+ofShader * ResourceManager::getShader(std::string path)
+{
+	return &shaders[path];
 }
 
