@@ -35,16 +35,16 @@ void Prop::draw()
 void Prop::setModel(std::string _modelstr)
 {
 	model = ents->rm->getModel(_modelstr);
-	mesh = ents->rm->getMesh(_modelstr);
+	//mesh = ents->rm->getMesh(_modelstr);
 }
 
 ofxAssimpModelLoader * Prop::getModel()
 {
 	return model;
 }
-
+/*
 ofMesh * Prop::getMesh()
 {
 	return mesh;
 }
-
+*/

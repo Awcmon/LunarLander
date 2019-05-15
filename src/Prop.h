@@ -11,8 +11,8 @@ public:
 	void draw();
 	void setModel(std::string _modelstr);
 	ofxAssimpModelLoader* getModel();
-	ofMesh* getMesh();
+	//ofMesh* getMesh();
 
 	ofxAssimpModelLoader* model;
-	ofMesh* mesh;
+	//ofMesh* mesh;
 };

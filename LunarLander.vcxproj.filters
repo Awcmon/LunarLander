@@ -76,6 +76,15 @@
     <ClCompile Include="src\VBOParticle.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Octree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Util.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -321,6 +330,24 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\autil.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\box.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Octree.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ray.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vector3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
