@@ -65,7 +65,7 @@ ResourceManager::ResourceManager()
 		//ofxAssimpModelLoader temp;
 		models[modelsDir.getPath(i)].loadModel(modelsDir.getPath(i));
 		models[modelsDir.getPath(i)].setScaleNormalization(false);
-		meshes[modelsDir.getPath(i)] = (&models[modelsDir.getPath(i)])->getMesh(0);
+		//meshes[modelsDir.getPath(i)] = (&models[modelsDir.getPath(i)])->getMesh(0);
 	}
 }
 
@@ -100,12 +100,13 @@ ResourceManager::~ResourceManager()
 		models[x.first].clear();
 	}
 	models.clear();
-
+	/*
 	for (auto const& x : meshes)
 	{
 		meshes[x.first].clear();
 	}
 	meshes.clear();
+	*/
 }
 
 ofImage* ResourceManager::getImage(std::string path)
@@ -148,12 +149,12 @@ ofxAssimpModelLoader* ResourceManager::getModel(std::string path)
 {
 	return &models[path];
 }
-
+/*
 ofMesh* ResourceManager::getMesh(std::string path)
 {
 	return &meshes[path];
 }
-
+*/
 void ResourceManager::loadShader(std::string path)
 {
 	
