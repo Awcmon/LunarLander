@@ -52,8 +52,6 @@ void Lander::update()
 	ofVec3f min = getModel()->getSceneMin(); //+ getPos();
 	ofVec3f max = getModel()->getSceneMax(); //+ getPos();
 
-	float epsilon = 0.5f; //epsilon for a contact
-
 	//calculate collisions at the legs of the lander
 	ofVec3f N = ofVec3f(0.0f, min.y + epsilon, max.z) + getPos();
 	ofVec3f S = ofVec3f(0.0f, min.y + epsilon, min.z) + getPos();
@@ -65,67 +63,18 @@ void Lander::update()
 	ofVec3f contactE = terrain->oct.trace(Ray(Vector3(E.x, E.y, E.z), Vector3(0.0f, -1.0f, 0.0f)));
 	ofVec3f contactW = terrain->oct.trace(Ray(Vector3(W.x, W.y, W.z), Vector3(0.0f, -1.0f, 0.0f)));
 
-	float e = 0.1f; //restitution
+
 	bool onGroundN, onGroundS, onGroundE, onGroundW;
-	if ((N - contactN).length() <= epsilon || N.y < contactN.y)
-	{
-		ofVec3f normal = (N - contactN).getNormalized();
-		ofVec3f impulse = (e + 1.0f) * (-getVel()).dot(normal) * normal;
-		if (impulse.y >= 0.0f)
-		{
-			applyForce(impulse);
-		}
-		onGroundN = true;
-	}
-	else
-	{
-		onGroundN = false;
-	}
-	if ((S - contactS).length() <= epsilon || S.y < contactS.y)
-	{
-		ofVec3f normal = (S - contactS).getNormalized();
-		ofVec3f impulse = (e + 1.0f) * (-getVel()).dot(normal) * normal;
-		if (impulse.y >= 0.0f)
-		{
-			applyForce(impulse);
-		}
-		onGroundS = true;
-		applyForce(-getVel() * 0.1f); //more dampening to help stop it from sliding around on the surface
-	}
-	else
-	{
-		onGroundS = false;
-	}
-	if ((E - contactE).length() <= epsilon || E.y < contactE.y)
-	{
-		ofVec3f normal = (E - contactE).getNormalized();
-		ofVec3f impulse = (e + 1.0f) * (-getVel()).dot(normal) * normal;
-		if (impulse.y >= 0.0f)
-		{
-			applyForce(impulse);
-		}
-		onGroundE = true;
-	}
-	else
-	{
-		onGroundE = false;
-	}
-	if ((W - contactW).length() <= epsilon || W.y < contactW.y)
-	{
-		ofVec3f normal = (W - contactW).getNormalized();
-		ofVec3f impulse = (e + 1.0f) * (-getVel()).dot(normal) * normal;
-		if (impulse.y >= 0.0f)
-		{
-			applyForce(impulse);
-		}
-		onGroundW = true;
-	}
-	else
-	{
-		onGroundW = false;
-	}
+	
+	handleCollision(N, contactN, onGroundN);
+	handleCollision(S, contactS, onGroundS);
+	handleCollision(E, contactE, onGroundE);
+	handleCollision(W, contactW, onGroundW);
+
 	if (onGroundN || onGroundE || onGroundS || onGroundW)
 	{
+		std::cout << "on ground\n";
+		applyForce(-getVel() * 0.1f); //more dampening to help stop it from sliding around on the surface
 		onGround = true;
 	}
 	else
@@ -154,4 +103,22 @@ void Lander::draw()
 	ofNoFill();
 	ofDrawBox(p, w, h, d);
 	*/
+}
+
+void Lander::handleCollision(const ofVec3f & pt, const ofVec3f & contactPt, bool & groundStatus)
+{
+	if ((pt - contactPt).length() <= epsilon || pt.y < contactPt.y)
+	{
+		ofVec3f normal = (pt - contactPt).getNormalized();
+		ofVec3f impulse = (e + 1.0f) * (-getVel()).dot(normal) * normal;
+		if (impulse.y >= 0.0f)
+		{
+			applyForce(impulse);
+		}
+		groundStatus = true;
+	}
+	else
+	{
+		groundStatus = false;
+	}
 }
