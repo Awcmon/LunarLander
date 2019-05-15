@@ -18,4 +18,7 @@ public:
 	void draw();
 
 	Lander* lander;
+
+	ofTexture  particleTex;
+	ofShader shader;
 };
