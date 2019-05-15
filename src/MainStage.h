@@ -20,4 +20,5 @@ public:
 
 	Terrain* terrain;
 	Lander* lander;
+	float agl;
 };
