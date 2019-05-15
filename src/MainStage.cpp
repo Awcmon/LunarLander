@@ -26,5 +26,5 @@ void MainStage::update()
 
 void MainStage::draw()
 {
-	ofDrawSphere(terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))), 0.75f);
+	//ofDrawSphere(terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))), 0.75f);
 }

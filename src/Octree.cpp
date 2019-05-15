@@ -267,12 +267,14 @@ ofVec3f Octree::trace(Ray ray)
 
 	ofVec3f retPt;
 
+	/*
 	ofNoFill();
 	for (int i = 0; i < retNodes.size(); i++)
 	{
 		drawBox(retNodes[i]->box);
 	}
 	ofFill();
+	*/
 
 	float distance = 0;
 	for (int i = 0; i < retNodes.size(); i++)
