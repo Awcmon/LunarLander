@@ -9,6 +9,8 @@ View::View()
 	ang = ofVec3f(0.0f, 0.0f, 0.0f);
 	distance = 10.0f;
 	mouseSens = 0.3f;
+
+	curCam = &trackCam;
 }
 
 void View::setInput(Input * _input)
@@ -41,8 +43,8 @@ void View::update()
 		ang = ofVec3f(0.0f, ang.y - delta.x * mouseSens, clamp(ang.z + delta.y * mouseSens, -89.99f, 89.99f));
 	}
 
-	cam.setPosition(centerPos + ofVec3f(distance, 0.0f, 0.0f).getRotated(0.0f, ang.y, ang.z));
-	cam.lookAt(centerPos);
+	trackCam.setPosition(centerPos + ofVec3f(distance, 0.0f, 0.0f).getRotated(0.0f, ang.y, ang.z));
+	trackCam.lookAt(centerPos);
 
 	//cam.setPosition(punchPos.x, punchPos.y, 10.0f);
 }

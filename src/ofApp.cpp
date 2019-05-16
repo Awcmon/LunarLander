@@ -24,10 +24,10 @@ void ofApp::setup(){
 	initLightingAndMaterials();
 
 	//cam.setupPerspective();
-	view.cam.setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
+	view.curCam->setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
 	//view.cam.setDistance(10);
-	view.cam.setNearClip(.1);
-	view.cam.setFov(65.5);
+	view.curCam->setNearClip(.1);
+	view.curCam->setFov(65.5);
 	//view.cam.enableOrtho();
 
 	curGameState = nullptr;
@@ -56,7 +56,7 @@ void ofApp::draw(){
 	//ofSetBackgroundColor(ofColor::cadetBlue);
 	ofSetBackgroundColor(ofColor::navy);
 
-	view.cam.begin();
+	view.curCam->begin();
 	ofEnableLighting();              // shaded mode
 
 	/*
@@ -84,7 +84,7 @@ void ofApp::draw(){
 
 	//rm.getModel("models\\moon-houdini.obj")->drawFaces();
 
-	view.cam.end();
+	view.curCam->end();
 
 	curGameState->draw();
 

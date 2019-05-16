@@ -17,8 +17,10 @@ public:
 	ofVec3f getTotalOffset();
 	void setCenterPos(ofVec3f _centerPos);
 
+	ofCamera* curCam;
+
 	Input* input;
-	ofCamera cam;
+	ofCamera trackCam;
 	//ofEasyCam cam;
 
 private:

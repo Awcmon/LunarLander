@@ -78,7 +78,7 @@ void Lander::update()
 
 	if (onGroundN || onGroundE || onGroundS || onGroundW)
 	{
-		std::cout << "on ground\n";
+		//std::cout << "on ground\n";
 		applyForce(-getVel() * 0.1f); //more dampening to help stop it from sliding around on the surface
 		isOnGround = true;
 	}
