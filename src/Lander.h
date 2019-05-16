@@ -11,13 +11,15 @@ public:
 	{ 
 		input = _input; 
 		terrain = _terrain; 
-		onGround = false;
+		isOnGround = false;
 
 		float epsilon = 0.5f; //epsilon for a contact
 		float e = 0.2f; //restitution
 	}
 	void update();
 	void draw();
+	bool onGround();
+	std::vector<Vector3> getLegPoints();
 
 private:
 	void handleCollision(const ofVec3f &pt, const ofVec3f &contactPt, bool &groundStatus);
@@ -27,5 +29,7 @@ private:
 
 	Input* input;
 	Terrain* terrain;
-	bool onGround;
+	bool isOnGround;
+
+	std::vector<Vector3> legPoints;
 };

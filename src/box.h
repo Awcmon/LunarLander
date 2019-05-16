@@ -2,6 +2,7 @@
 #define _BOX_H_
 
 #include <assert.h>
+#include <vector>
 #include "vector3.h"
 #include "ray.h"
 
@@ -40,6 +41,18 @@ class Box {
 		for (int i = 0; i < size; i++) {
 			if (!inside(points[i])) allInside = false;
 			break;
+		}
+		return allInside;
+	}
+	const bool inside(std::vector<Vector3> points) {
+		bool allInside = true;
+		for (size_t i = 0; i < points.size(); i++) 
+		{
+			if (!inside(points[i]))
+			{
+				allInside = false;
+				break;
+			}
 		}
 		return allInside;
 	}

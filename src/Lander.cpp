@@ -11,7 +11,7 @@ Lander::Lander(ofxAssimpModelLoader* _model)
 void Lander::update()
 {
 	Prop::update();
-	if (!onGround)
+	if (!onGround())
 	{
 		applyForce(ofVec3f(0.0f, -0.001f, 0.0f)); //apply gravity
 	}
@@ -57,6 +57,11 @@ void Lander::update()
 	ofVec3f S = ofVec3f(0.0f, min.y + epsilon, min.z) + getPos();
 	ofVec3f E = ofVec3f(max.x, min.y + epsilon, 0.0f) + getPos();
 	ofVec3f W = ofVec3f(min.x, min.y + epsilon, 0.0f) + getPos();
+	legPoints.clear();
+	legPoints.push_back(Vector3(N.x, N.y, N.z));
+	legPoints.push_back(Vector3(S.x, S.y, S.z));
+	legPoints.push_back(Vector3(E.x, E.y, E.z));
+	legPoints.push_back(Vector3(W.x, W.y, W.z));
 
 	ofVec3f contactN = terrain->oct.trace(Ray(Vector3(N.x, N.y, N.z), Vector3(0.0f, -1.0f, 0.0f)));
 	ofVec3f contactS = terrain->oct.trace(Ray(Vector3(S.x, S.y, S.z), Vector3(0.0f, -1.0f, 0.0f)));
@@ -75,11 +80,11 @@ void Lander::update()
 	{
 		std::cout << "on ground\n";
 		applyForce(-getVel() * 0.1f); //more dampening to help stop it from sliding around on the surface
-		onGround = true;
+		isOnGround = true;
 	}
 	else
 	{
-		onGround = false;
+		isOnGround = false;
 	}
 }
 
@@ -103,6 +108,35 @@ void Lander::draw()
 	ofNoFill();
 	ofDrawBox(p, w, h, d);
 	*/
+
+	/*
+	ofVec3f min = getModel()->getSceneMin(); //+ getPos();
+	ofVec3f max = getModel()->getSceneMax(); //+ getPos();
+
+	//calculate collisions at the legs of the lander
+	ofVec3f N = ofVec3f(0.0f, min.y + epsilon, max.z) + getPos();
+	ofVec3f S = ofVec3f(0.0f, min.y + epsilon, min.z) + getPos();
+	ofVec3f E = ofVec3f(max.x, min.y + epsilon, 0.0f) + getPos();
+	ofVec3f W = ofVec3f(min.x, min.y + epsilon, 0.0f) + getPos();
+	ofVec3f contactN = terrain->oct.trace(Ray(Vector3(N.x, N.y, N.z), Vector3(0.0f, -1.0f, 0.0f)));
+	ofVec3f contactS = terrain->oct.trace(Ray(Vector3(S.x, S.y, S.z), Vector3(0.0f, -1.0f, 0.0f)));
+	ofVec3f contactE = terrain->oct.trace(Ray(Vector3(E.x, E.y, E.z), Vector3(0.0f, -1.0f, 0.0f)));
+	ofVec3f contactW = terrain->oct.trace(Ray(Vector3(W.x, W.y, W.z), Vector3(0.0f, -1.0f, 0.0f)));
+	ofDrawSphere(contactN, 0.2f);
+	ofDrawSphere(contactS, 0.2f);
+	ofDrawSphere(contactE, 0.2f);
+	ofDrawSphere(contactW, 0.2f);
+	*/
+}
+
+bool Lander::onGround()
+{
+	return isOnGround;
+}
+
+std::vector<Vector3> Lander::getLegPoints()
+{
+	return legPoints;
 }
 
 void Lander::handleCollision(const ofVec3f & pt, const ofVec3f & contactPt, bool & groundStatus)
