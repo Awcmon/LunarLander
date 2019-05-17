@@ -28,7 +28,7 @@ void Lander::update()
 	}
 	if (input->keyDown('s'))
 	{
-		applyForce(ofVec3f(0.0f, 0.004f, 0.004f));
+		applyForce(ofVec3f(0.0f, 0.0f, 0.004f));
 		ents->rm->playSoundLoop("soundloops\\afterburner.wav");
 	}
 	if (input->keyDown('a'))
@@ -38,7 +38,7 @@ void Lander::update()
 	}
 	if (input->keyDown('d'))
 	{
-		applyForce(ofVec3f(0.004f, 0.004f, -0.0f));
+		applyForce(ofVec3f(0.004f, 0.0f, -0.0f));
 		ents->rm->playSoundLoop("soundloops\\afterburner.wav");
 	}
 	
