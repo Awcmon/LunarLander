@@ -10,8 +10,6 @@ void MainStage::setup()
 
 	lander = new Lander(rm->getModel("models\\lander.obj"), input, terrain);
 	ents->add(lander);
-	lander->setPos(ofVec3f(0.0f, 100.0f, 0.0f));
-	lander->setVel(ofVec3f(0.0f, -0.05f, 0.0f));
 
 	//view->curCam->setPosition(ofVec3f(50.0f, 50.0f, 50.0f));
 
@@ -41,6 +39,19 @@ void MainStage::setup()
 	spotlight.setSpecularColor(ofFloatColor(1, 1, 1));
 	spotlight.rotate(-45, ofVec3f(1, 0, 0));
 	spotlight.setPosition(0, 0, 0);
+
+	init();
+}
+
+void MainStage::init()
+{
+	lander->setPos(ofVec3f(0.0f, 100.0f, 0.0f));
+	lander->setVel(ofVec3f(0.0f, -0.05f, 0.0f));
+
+	landed = false;
+	inZone = false;
+	crashed = false;
+	startTime = ofGetElapsedTimef();
 }
 
 void MainStage::update()
@@ -53,6 +64,36 @@ void MainStage::update()
 	view->downCam.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
 
 	agl = (terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))) - lander->getPos()).length();
+
+	//do right when landed
+	if (lander->onGround() && !landed)
+	{
+		timeElapsed = ofGetElapsedTimef() - startTime;
+		score = 200.0f - timeElapsed;
+		if (landingArea.inside(lander->getLegPoints()))
+		{
+			inZone = true;
+		}
+		else
+		{
+			score *= 0.5f;
+		}
+		if (lander->getVel().length() > 0.05f)
+		{
+			score = 0.0f;
+			crashed = true;
+		}
+	}
+
+	if (lander->onGround())
+	{
+		landed = true;
+	}
+
+	if (landed && input->keyPressed('r'))
+	{
+		init();
+	}
 
 }
 
@@ -99,5 +140,25 @@ void MainStage::draw()
 
 	ofSetColor(ofColor::white);
 	ofDrawBitmapString("AGL: " + std::to_string(agl), 15, 15);
+	float speed = lander->getVel().length();
+	ofDrawBitmapString("SPD: " + std::to_string(speed), 15, 30);
+	if (speed > 0.05f && agl < 20.0f)
+	{
+		ofDrawBitmapString("REDUCE SPEED BEFORE LANDING", 15, 45);
+	}
 
+	if (landed)
+	{
+		ofDrawBitmapString("YOU LANDED IN " + std::to_string(timeElapsed) + " SECONDS", 500, 500);
+		ofDrawBitmapString("SCORE: " + std::to_string(score), 500, 515);
+		if (!inZone)
+		{
+			ofDrawBitmapString("SCORE HALVED FOR LANDING OUTSIDE THE ZONE", 500, 530);
+		}
+		if (crashed)
+		{
+			ofDrawBitmapString("NO SCORE FOR CRASHING", 500, 545);
+		}
+		ofDrawBitmapString("PRESS R TO RESTART", 500, 560);
+	}
 }

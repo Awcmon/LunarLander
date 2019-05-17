@@ -18,6 +18,8 @@ public:
 	void update();
 	void draw();
 
+	void init();
+
 	Terrain* terrain;
 	Lander* lander;
 	float agl;
@@ -27,4 +29,9 @@ public:
 	ofLight spotlight;
 
 	bool landed;
+	int startTime;
+	float timeElapsed;
+	bool crashed;
+	bool inZone;
+	float score;
 };
