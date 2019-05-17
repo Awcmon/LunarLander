@@ -1,5 +1,8 @@
 #include "Prop.h"
 
+//Alan Duong, 05/16/19
+//An entity with a 3d model
+
 Prop::Prop(ofxAssimpModelLoader* _model)
 {
 	model = _model;

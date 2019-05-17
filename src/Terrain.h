@@ -1,5 +1,8 @@
 #pragma once
 
+//Alan Duong, 05/16/19
+//A Prop with an Octree.
+
 #include "Prop.h"
 #include "Octree.h"
 

@@ -1,5 +1,8 @@
 #include "Terrain.h"
 
+//Alan Duong, 05/16/19
+//A Prop with an Octree.
+
 void Terrain::update()
 {
 	Prop::update();

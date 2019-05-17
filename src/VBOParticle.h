@@ -1,5 +1,8 @@
 #pragma once
 
+//Alan Duong, 05/16/19
+//A particle meant to be drawn with a VBO
+
 #include "Entity.h"
 #include <vector>
 

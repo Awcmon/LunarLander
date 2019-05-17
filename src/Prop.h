@@ -1,5 +1,8 @@
 #pragma once
 
+//Alan Duong, 05/16/19
+//An entity with a 3d model
+
 #include "Entity.h"
 #include <string>
 
