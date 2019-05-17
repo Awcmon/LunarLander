@@ -20,7 +20,10 @@ public:
 	ofCamera* curCam;
 
 	Input* input;
-	ofCamera trackCam;
+
+	ofCamera followCam;
+	ofCamera frontCam;
+	ofCamera downCam;
 	//ofEasyCam cam;
 
 private:
@@ -30,4 +33,6 @@ private:
 	ofVec3f centerPos;
 	ofVec3f ang;
 	float mouseSens;
+
+	ofCamera trackingCam;
 };

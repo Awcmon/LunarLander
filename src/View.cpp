@@ -10,7 +10,22 @@ View::View()
 	distance = 10.0f;
 	mouseSens = 0.3f;
 
-	curCam = &trackCam;
+	curCam = &followCam;
+
+	followCam.setNearClip(.1);
+	followCam.setFov(65.5);
+
+	frontCam.setOrientation(glm::vec3(0.0f, 0.0f, 0.0f));
+	frontCam.setNearClip(.1);
+	frontCam.setFov(65.5);
+
+	downCam.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+	downCam.setNearClip(.1);
+	downCam.setFov(65.5);
+
+	trackingCam.setPosition(ofVec3f(20.0f, 20.0f, 20.0f));
+	trackingCam.setNearClip(.1);
+	trackingCam.setFov(65.5);
 }
 
 void View::setInput(Input * _input)
@@ -29,6 +44,25 @@ void View::posViewPunch(ofVec3f _punchPos)
 
 void View::update()
 {
+	if (input->keyPressed('1'))
+	{
+		curCam = &followCam;
+	}
+	else if (input->keyPressed('2'))
+	{
+		curCam = &frontCam;
+	}
+	else if (input->keyPressed('3'))
+	{
+		curCam = &downCam;
+	}
+	else if (input->keyPressed('4'))
+	{
+		curCam = &trackingCam;
+	}
+
+
+
 	//reset punch pos
 	//punchPos.x = approach(punchPos.x, 0, (punchPos.x) * 0.1);
 	//punchPos.y = approach(punchPos.y, 0, (punchPos.y) * 0.1);
@@ -43,8 +77,12 @@ void View::update()
 		ang = ofVec3f(0.0f, ang.y - delta.x * mouseSens, clamp(ang.z + delta.y * mouseSens, -89.99f, 89.99f));
 	}
 
-	trackCam.setPosition(centerPos + ofVec3f(distance, 0.0f, 0.0f).getRotated(0.0f, ang.y, ang.z));
-	trackCam.lookAt(centerPos);
+	followCam.setPosition(centerPos + ofVec3f(distance, 0.0f, 0.0f).getRotated(0.0f, ang.y, ang.z));
+	followCam.lookAt(centerPos);
+
+	trackingCam.lookAt(centerPos);
+
+	
 
 	//cam.setPosition(punchPos.x, punchPos.y, 10.0f);
 }
