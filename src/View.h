@@ -24,6 +24,7 @@ public:
 	ofCamera followCam;
 	ofCamera frontCam;
 	ofCamera downCam;
+	ofEasyCam easyCam;
 	//ofEasyCam cam;
 
 private:

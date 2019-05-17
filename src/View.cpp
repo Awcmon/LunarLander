@@ -26,6 +26,11 @@ View::View()
 	trackingCam.setPosition(ofVec3f(20.0f, 20.0f, 20.0f));
 	trackingCam.setNearClip(.1);
 	trackingCam.setFov(65.5);
+
+	easyCam.setDistance(10);
+	easyCam.setNearClip(.1);
+	easyCam.setFov(65.5);
+	//easyCam.enableOrtho();
 }
 
 void View::setInput(Input * _input)
@@ -59,6 +64,10 @@ void View::update()
 	else if (input->keyPressed('4'))
 	{
 		curCam = &trackingCam;
+	}
+	else if (input->keyPressed('5'))
+	{
+		curCam = &easyCam;
 	}
 
 

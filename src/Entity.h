@@ -1,6 +1,6 @@
 #pragma once
 
-//Alan Duong, 03/31/19
+//Alan Duong, 05/16/19
 //An entity class from which all game objects inherit from.
 //The physics stuff is done here.
 

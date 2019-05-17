@@ -4,12 +4,16 @@
 //Gamestate for the main stage of the game
 
 #include "GameState.h"
+//Alan Duong, 05/16/19
+//Gamestate for the main stage of the game
+
 #include "unordered_set"
 #include "Prop.h"
 #include "Lander.h"
 #include "Terrain.h"
 #include "autil.h"
 #include <array>
+
 
 class MainStage : public GameState
 {

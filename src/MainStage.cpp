@@ -1,6 +1,6 @@
 #include "MainStage.h"
 
-//Alan Duong, 03/31/19
+//Alan Duong, 05/16/19
 //Gamestate for the main stage of the game
 
 void MainStage::setup()
@@ -13,10 +13,12 @@ void MainStage::setup()
 
 	//view->curCam->setPosition(ofVec3f(50.0f, 50.0f, 50.0f));
 
+	//set up the landing area
 	ofVec3f min = ofVec3f(-24.0f, -2.0f, -24.0f);
 	ofVec3f max = ofVec3f(24.0f, 1.5f, 24.0f);
 	landingArea = Box(Vector3(min.x, min.y, min.z), Vector3(max.x, max.y, max.z));
 
+	//set up the lights
 	keyLight.setup();
 	keyLight.enable();
 	keyLight.setAreaLight(1, 1);
@@ -43,6 +45,7 @@ void MainStage::setup()
 	init();
 }
 
+//init the things that get reset every game restart
 void MainStage::init()
 {
 	lander->setPos(ofVec3f(0.0f, 100.0f, 0.0f));
@@ -58,16 +61,19 @@ void MainStage::update()
 {
 	//view->cam.setPosition(lander->getPos() + ofVec3f(10.0f, 10.0f, 10.0f));
 	//view->cam.lookAt(lander->getPos());
-	view->setCenterPos(lander->getPos() + ofVec3f(0.0f, 4.0f, 0.0f));
 
+	//update the views
+	view->setCenterPos(lander->getPos() + ofVec3f(0.0f, 4.0f, 0.0f));
 	view->frontCam.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, -0.5f));
 	view->downCam.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
 
+	//update agl
 	agl = (terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))) - lander->getPos()).length();
 
 	//do right when landed
 	if (lander->onGround() && !landed)
 	{
+		//calculate score
 		timeElapsed = ofGetElapsedTimef() - startTime;
 		score = 200.0f - timeElapsed;
 		if (landingArea.inside(lander->getLegPoints()))
@@ -83,13 +89,10 @@ void MainStage::update()
 			score = 0.0f;
 			crashed = true;
 		}
-	}
-
-	if (lander->onGround())
-	{
 		landed = true;
 	}
 
+	//allow restarting when landed
 	if (landed && input->keyPressed('r'))
 	{
 		init();
@@ -104,6 +107,7 @@ void MainStage::draw()
 
 	view->curCam->begin();
 
+	//draw the landing zone
 	Vector3 bmin = landingArea.parameters[0];
 	Vector3 bmax = landingArea.parameters[1];
 	Vector3 size = bmax - bmin;
@@ -123,6 +127,7 @@ void MainStage::draw()
 	}
 	ofDrawBox(p, w, h, d);
 
+	//draw the lights
 	keyLight.draw();
 	spotlight.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
 	spotlight.draw();
@@ -138,6 +143,7 @@ void MainStage::draw()
 
 	view->curCam->end();
 
+	//screenspace text
 	ofSetColor(ofColor::white);
 	ofDrawBitmapString("AGL: " + std::to_string(agl), 15, 15);
 	float speed = lander->getVel().length();

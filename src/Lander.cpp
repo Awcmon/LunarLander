@@ -1,6 +1,9 @@
 #include "Lander.h"
 #include "box.h"
 
+//Alan Duong, 05/16/19
+//The class for the lander, or the player. Because the player is the lander.
+
 /*
 Lander::Lander(ofxAssimpModelLoader* _model)
 {
@@ -10,12 +13,14 @@ Lander::Lander(ofxAssimpModelLoader* _model)
 
 void Lander::update()
 {
-	Prop::update();
+	Prop::update(); //update parent class
+
 	if (!onGround())
 	{
-		applyForce(ofVec3f(0.0f, -0.001f, 0.0f)); //apply gravity
+		applyForce(ofVec3f(0.0f, -0.001f, 0.0f)); //apply gravity when not on ground
 	}
 	
+	//apply thrust when pressing motion keys
 	if (input->keyDown(' '))
 	{
 		applyForce(ofVec3f(0.0f, 0.004f, 0.0f));
@@ -42,6 +47,7 @@ void Lander::update()
 		ents->rm->playSoundLoop("soundloops\\afterburner.wav");
 	}
 	
+	//If not moving, stop the thruster sound
 	if (!input->keyDown(' ') && !input->keyDown('w') && !input->keyDown('a') && !input->keyDown('s') && !input->keyDown('d'))
 	{
 		ents->rm->stopSoundLoop("soundloops\\afterburner.wav");
@@ -71,11 +77,13 @@ void Lander::update()
 
 	bool onGroundN, onGroundS, onGroundE, onGroundW;
 	
+	//handle collisions for each leg
 	handleCollision(N, contactN, onGroundN);
 	handleCollision(S, contactS, onGroundS);
 	handleCollision(E, contactE, onGroundE);
 	handleCollision(W, contactW, onGroundW);
 
+	//when any leg is on the ground
 	if (onGroundN || onGroundE || onGroundS || onGroundW)
 	{
 		//std::cout << "on ground\n";
@@ -139,6 +147,7 @@ std::vector<Vector3> Lander::getLegPoints()
 	return legPoints;
 }
 
+//resolve the collision
 void Lander::handleCollision(const ofVec3f & pt, const ofVec3f & contactPt, bool & groundStatus)
 {
 	if ((pt - contactPt).length() <= epsilon || pt.y < contactPt.y)

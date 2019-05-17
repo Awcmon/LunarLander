@@ -1,5 +1,8 @@
 #pragma once
 
+//Alan Duong, 05/16/19
+//The class for the lander, or the player. Because the player is the lander.
+
 #include "Prop.h"
 #include "Input.h"
 #include "Terrain.h"
@@ -24,8 +27,8 @@ public:
 private:
 	void handleCollision(const ofVec3f &pt, const ofVec3f &contactPt, bool &groundStatus);
 
-	float epsilon;
-	float e;
+	float epsilon; //epsilon for collision detection
+	float e; //elasticity
 
 	Input* input;
 	Terrain* terrain;

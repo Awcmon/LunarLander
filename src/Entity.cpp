@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-//Alan Duong, 03/31/19
+//Alan Duong, 05/16/19
 //An entity class from which all game objects inherit from.
 //The physics stuff is done here.
 
@@ -139,6 +139,7 @@ ofVec3f Entity::forward()
 	return ofVec3f(1.0f, 0.0f, 0.0f);
 }
 
+//integrate the physics stuff
 void Entity::integrate()
 {
 	//float dt = 1.0 / ofGetFrameRate();
