@@ -22,4 +22,9 @@ public:
 	Lander* lander;
 	float agl;
 	Box landingArea;
+
+	ofLight keyLight;
+	ofLight spotlight;
+
+	bool landed;
 };

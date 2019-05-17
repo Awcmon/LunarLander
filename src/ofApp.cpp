@@ -24,10 +24,10 @@ void ofApp::setup(){
 	initLightingAndMaterials();
 
 	//cam.setupPerspective();
-	view.curCam->setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
+	//view.curCam->setPosition(ofVec3f(0.0f, 0.0f, 0.0f));
 	//view.cam.setDistance(10);
-	view.curCam->setNearClip(.1);
-	view.curCam->setFov(65.5);
+	//view.curCam->setNearClip(.1);
+	//view.curCam->setFov(65.5);
 	//view.cam.enableOrtho();
 
 	curGameState = nullptr;
@@ -54,7 +54,7 @@ void ofApp::update(){
 void ofApp::draw(){
 	if (curGameState == nullptr) { return; }
 	//ofSetBackgroundColor(ofColor::cadetBlue);
-	ofSetBackgroundColor(ofColor::navy);
+	ofSetBackgroundColor(ofColor::black);
 
 	view.curCam->begin();
 	ofEnableLighting();              // shaded mode

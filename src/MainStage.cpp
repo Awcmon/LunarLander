@@ -19,6 +19,28 @@ void MainStage::setup()
 	ofVec3f max = ofVec3f(24.0f, 1.5f, 24.0f);
 	landingArea = Box(Vector3(min.x, min.y, min.z), Vector3(max.x, max.y, max.z));
 
+	keyLight.setup();
+	keyLight.enable();
+	keyLight.setAreaLight(1, 1);
+	keyLight.setAmbientColor(ofFloatColor(1, 1, 1)*0.5f);
+	keyLight.setDiffuseColor(ofFloatColor(1, 1, 1)*0.5f);
+	keyLight.setSpecularColor(ofFloatColor(1, 1, 1)*0.5f);
+	keyLight.setScale(0);
+	keyLight.rotate(45, ofVec3f(0, 1, 0));
+	keyLight.rotate(-45, ofVec3f(1, 0, 0));
+	keyLight.setPosition(200.0f, 400.0f, 200.0f);
+
+	spotlight.setup();
+	spotlight.enable();
+	spotlight.setSpotlight();
+	spotlight.setScale(0);
+	spotlight.setSpotlightCutOff(30);
+	spotlight.setAttenuation(.2, .001, .001);
+	spotlight.setAmbientColor(ofFloatColor(1, 1, 1));
+	spotlight.setDiffuseColor(ofFloatColor(1, 1, 1));
+	spotlight.setSpecularColor(ofFloatColor(1, 1, 1));
+	spotlight.rotate(-45, ofVec3f(1, 0, 0));
+	spotlight.setPosition(0, 0, 0);
 }
 
 void MainStage::update()
@@ -26,6 +48,10 @@ void MainStage::update()
 	//view->cam.setPosition(lander->getPos() + ofVec3f(10.0f, 10.0f, 10.0f));
 	//view->cam.lookAt(lander->getPos());
 	view->setCenterPos(lander->getPos() + ofVec3f(0.0f, 4.0f, 0.0f));
+
+	view->frontCam.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, -0.5f));
+	view->downCam.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
+
 	agl = (terrain->oct.trace(Ray(Vector3(lander->getPos().x, lander->getPos().y, lander->getPos().z), Vector3(0.0f, -1.0f, 0.0f))) - lander->getPos()).length();
 
 }
@@ -55,6 +81,10 @@ void MainStage::draw()
 		ofSetColor(ofColor::white);
 	}
 	ofDrawBox(p, w, h, d);
+
+	keyLight.draw();
+	spotlight.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
+	spotlight.draw();
 
 
 	/*
