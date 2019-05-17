@@ -8,7 +8,7 @@ void MainStage::setup()
 	terrain = new Terrain(rm->getModel("models\\moon-houdini.obj"));
 	ents->add(terrain);
 
-	lander = new Lander(rm->getModel("models\\lander.obj"), input, terrain);
+	lander = new Lander(rm->getModel("models\\lander.obj"), input, terrain, &points, &sizes);
 	ents->add(lander);
 
 	//view->curCam->setPosition(ofVec3f(50.0f, 50.0f, 50.0f));
@@ -132,8 +132,32 @@ void MainStage::draw()
 	spotlight.setPosition(lander->getPos() + ofVec3f(0.0f, 0.75f, 0.0f));
 	spotlight.draw();
 
+	//draw the VBO particles
+	int total = (int)points.size();
+	vbo.clear();
+	vbo.setVertexData(&points[0], total, GL_STATIC_DRAW);
+	vbo.setNormalData(&sizes[0], total, GL_STATIC_DRAW);
 
-	/*
+	ofEnablePointSprites();
+	ofEnableAlphaBlending();
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
+	glDepthMask(GL_FALSE);
+
+	rm->getShader("shaders/shader")->begin();
+	rm->getTexture("images\\smokepuff1.png")->bind();
+	ofSetColor(ofColor::white);
+	vbo.draw(GL_POINTS, 0, (int)points.size());
+	rm->getTexture("images\\smokepuff1.png")->unbind();
+	rm->getShader("shaders/shader")->end();
+
+	//ofDisablePointSprites();
+	//ofDisableBlendMode();
+	glDepthMask(GL_TRUE);
+
+	points.clear();
+	sizes.clear();
+
+	/*draw the leg points
 	std::vector<Vector3> legPoints = lander->getLegPoints();
 	for (size_t i = 0; i < legPoints.size(); i++)
 	{

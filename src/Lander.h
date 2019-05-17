@@ -6,15 +6,19 @@
 #include "Prop.h"
 #include "Input.h"
 #include "Terrain.h"
+#include "VBOParticle.h"
 
 class Lander : public Prop
 {
 public:
-	Lander(ofxAssimpModelLoader* _model, Input* _input, Terrain* _terrain) : Prop(_model) 
+	Lander(ofxAssimpModelLoader* _model, Input* _input, Terrain* _terrain, std::vector<ofVec3f>* _points, std::vector<ofVec3f>* _sizes) : Prop(_model) 
 	{ 
 		input = _input; 
 		terrain = _terrain; 
 		isOnGround = false;
+
+		points = _points;
+		sizes = _sizes;
 
 		float epsilon = 0.5f; //epsilon for a contact
 		float e = 0.2f; //restitution
@@ -35,4 +39,8 @@ private:
 	bool isOnGround;
 
 	std::vector<Vector3> legPoints;
+
+	std::vector<ofVec3f>* points; 
+	std::vector<ofVec3f>* sizes;
+
 };

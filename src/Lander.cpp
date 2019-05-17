@@ -52,6 +52,15 @@ void Lander::update()
 	{
 		ents->rm->stopSoundLoop("soundloops\\afterburner.wav");
 	}
+	else //if we are pressing any sort of movement button
+	{
+		VBOParticle* smokepuff = new VBOParticle(points, sizes);
+		smokepuff->setPos(getPos());
+		smokepuff->setVel(ofVec3f(0.0f, -0.3f, 0.0f));
+		smokepuff->setScale(25.0f+ofRandom(75.0f));
+		smokepuff->lifespan = 75;
+		ents->add(smokepuff);
+	}
 
 	applyForce(-getVel() * 0.005f); //dampening force
 

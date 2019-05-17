@@ -18,5 +18,5 @@ void VBOParticle::draw()
 {
 	Entity::draw();
 	points->push_back(getPos());
-	sizes->push_back(ofVec3f(5.0f));
+	sizes->push_back(ofVec3f(scale));
 }

@@ -21,6 +21,7 @@ public:
 
 	void init();
 
+private:
 	Terrain* terrain;
 	Lander* lander;
 	float agl;
@@ -35,4 +36,8 @@ public:
 	bool crashed;
 	bool inZone;
 	float score;
+
+	std::vector<ofVec3f> points;
+	std::vector<ofVec3f> sizes;
+	ofVbo vbo;
 };
